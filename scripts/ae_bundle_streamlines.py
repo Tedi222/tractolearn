@@ -22,7 +22,7 @@ from scilpy.tracking.tools import resample_streamlines_num_points
 from tqdm import tqdm
 
 from tractolearn.filtering.latent_space_featuring import (
-    filter_streamlines_only,
+    filter_streamlines_only, filter_streamlines_only_v2
 )
 from tractolearn.learning.dataset import OnTheFlyDataset
 from tractolearn.logger import LoggerKeys, _set_up_logger
@@ -139,7 +139,7 @@ def batch_filtering(
         latent_f, y_f = encode_data(dataloader, device, model)
         assert np.all(y == y_f)
 
-        filter_streamlines_only(
+        filter_streamlines_only_v2(
             streamline_classes,
             latent_f,
             latent_atlas_all,
@@ -152,6 +152,8 @@ def batch_filtering(
             trk=tractogram,
             num_neighbors=args.num_neighbors,
             id_bundle=i,
+            return_bundles=True,
+            return_merged=False
         )
 
 
@@ -236,7 +238,7 @@ def whole_filtering(
 
     tractogram.data_per_streamline["ids"] = list(range(len(tractogram)))
 
-    filter_streamlines_only(
+    filter_streamlines_only_v2(
         streamline_classes,
         latent_f,
         latent_atlas_all,
@@ -248,6 +250,8 @@ def whole_filtering(
         trk_ids=tractogram.data_per_streamline["ids"],
         trk=tractogram,
         num_neighbors=args.num_neighbors,
+        return_bundles=True,
+        return_merged=True
     )
 
 
