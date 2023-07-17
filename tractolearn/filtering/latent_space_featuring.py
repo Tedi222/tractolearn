@@ -612,7 +612,6 @@ def roc_curve_computation(
 
     elapsed = time() - start
     filtering_time_probe["filtering_th"] = elapsed
-
     roc_plot_fname = (
         fname_root
         + LoggerKeys.underscore.value
@@ -620,7 +619,6 @@ def roc_curve_computation(
         + LoggerKeys.fname_extension_sep.value
         + LoggerKeys.fname_extension_sep.plot_extension.value
     )
-
     plot_roc(
         roc_dict["fpr"],
         roc_dict["tpr"],

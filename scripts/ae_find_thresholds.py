@@ -464,16 +464,16 @@ def main():
         plot_latent_space(
             latent_all_f,
             y_latent_all_f,
-            class_names,
             config[ThresholdTestKeys.LATENT_DIMS],
             fname_root,
+            rbx_classes=False
         )
         plot_latent_space(
             latent_all,
             y_latent_all,
-            class_names_all,
             config[ThresholdTestKeys.LATENT_DIMS],
             fname_root_atlas,
+            rbx_classes=False
         )
 
     thresholds_dict = set_threshold(
