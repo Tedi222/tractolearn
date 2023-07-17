@@ -166,7 +166,7 @@ def set_threshold(
                 config[ThresholdTestKeys.LATENT_DIMS],
                 {"plausible": 0, "implausible": 100},
                 pjoin(experiment_dir, k, "thres"),
-                "hcp",
+                "mci",
                 y_thres_plaus,
                 y_thres_implaus,
                 plaus_streamlines_latent_distances,

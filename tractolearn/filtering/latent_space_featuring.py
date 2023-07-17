@@ -62,6 +62,8 @@ def get_dataset_long_name_from_dataset_name(dataset_name):
         dataset_long_name = "Penthera"
     elif dataset_name == "hcp":
         dataset_long_name = "Human Connectome Project"
+    elif dataset_name == "mci":
+        dataset_long_name = "BioFINDER"
     else:
         raise ValueError("Unknown dataset name")
 
