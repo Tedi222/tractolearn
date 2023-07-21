@@ -7,14 +7,14 @@ from pathlib import Path
 from uuid import uuid4
 
 
-def make_run_dir(out_path=None, generate_uuid=True):
+def make_run_dir(out_path=None, add_uuid=True):
     """Create a directory for this training run"""
     if out_path is None:
         root_output_path = Path(os.environ.get("OUTPUT_PATH", "."))
     else:
         root_output_path = out_path
 
-    if generate_uuid:
+    if add_uuid:
         run_name = generate_uuid()
         run_dir = Path(pjoin(root_output_path, run_name))
     else:
