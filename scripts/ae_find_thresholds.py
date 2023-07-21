@@ -252,7 +252,7 @@ def main():
     config[ThresholdTestKeys.OUTPUT] = args.output
     config[ThresholdTestKeys.STREAMLINE_CLASSES] = args.streamline_classes
 
-    experiment_dir = make_run_dir(out_path=config[ThresholdTestKeys.OUTPUT])
+    experiment_dir = make_run_dir(out_path=config[ThresholdTestKeys.OUTPUT], generate_uuid=False)
     shutil.copy(args.config_file, experiment_dir)
     device = config[ThresholdTestKeys.DEVICE]
 
