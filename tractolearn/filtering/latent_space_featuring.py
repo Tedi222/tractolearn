@@ -319,6 +319,7 @@ def filter_streamlines_only_v2(
     if return_merged:
         merged_data_per_streamlines = {"ids": []}
         merged_streamline_slices = np.empty(0, dtype=int)
+        name_merged = f"filtered_merged.trk"
 
 
     for y in tqdm(np.unique(nearest_indices_class_final)):
@@ -360,7 +361,6 @@ def filter_streamlines_only_v2(
             )
 
         if return_merged:
-            name_merged = f"merged.trk"
 
             merged_data_per_streamlines["ids"].extend(trk_ids[idx[indices_plausibles]])
 
@@ -378,6 +378,7 @@ def filter_streamlines_only_v2(
         )
 
     logger.info("Finished filtering streamlines into plausibles/implausibles.")
+
 
 def plot_latent_space(
     latent_samples, classes, latent_space_dims, fname_root, rbx_classes=True
@@ -540,19 +541,19 @@ def find_tractogram_filtering_threshold_v2(
     )
 
     # Plot the features for the validation streamlines
-    plot_filtering_threshold_features(
-        roc_dict,
-        distances_plaus_roc,
-        distances_implaus_roc,
-        (y_thres_plaus_roc >= 0).astype(np.float32)
-        * bundles_classes_dict["plausible"],
-        (y_thres_implaus_roc >= 0).astype(np.float32)
-        * bundles_classes_dict["implausible"],
-        latent_space_dims,
-        bundles_classes_dict,
-        fname_root,
-        dataset_name,
-    )
+    # plot_filtering_threshold_features(
+    #     roc_dict,
+    #     distances_plaus_roc,
+    #     distances_implaus_roc,
+    #     (y_thres_plaus_roc >= 0).astype(np.float32)
+    #     * bundles_classes_dict["plausible"],
+    #     (y_thres_implaus_roc >= 0).astype(np.float32)
+    #     * bundles_classes_dict["implausible"],
+    #     latent_space_dims,
+    #     bundles_classes_dict,
+    #     fname_root,
+    #     dataset_name,
+    # )
 
     if roc_optimal_point == ROCSalientPoint.INV_DIAGONAL_INTERSECT:
         threshold = roc_dict["optimal_intersect_th"]
@@ -579,11 +580,11 @@ def roc_curve_computation(
     dataset_name,
 ):
 
-    dpi = 300
-    figure_rc = {"figure": {"dpi": dpi}}
+    # dpi = 300
+    # figure_rc = {"figure": {"dpi": dpi}}
 
-    rc_parameters = generate_decoration_rc_parameters()
-    rc_parameters.update(figure_rc)
+    # rc_parameters = generate_decoration_rc_parameters()
+    # rc_parameters.update(figure_rc)
     # Plot the ROC curve
 
     set_label = _get_set_label(fname_root)
@@ -619,18 +620,18 @@ def roc_curve_computation(
         + LoggerKeys.fname_extension_sep.value
         + LoggerKeys.fname_extension_sep.plot_extension.value
     )
-    plot_roc(
-        roc_dict["fpr"],
-        roc_dict["tpr"],
-        roc_dict["thresholds"],
-        roc_dict["auc"],
-        roc_plot_fname,
-        dataset_name,
-        roc_dict["optimal_diff_idx"],
-        roc_dict["optimal_intersect_idx"],
-        # roc_dict["optimal_max_acc_idx"],
-        **rc_parameters,
-    )
+    # plot_roc(
+    #     roc_dict["fpr"],
+    #     roc_dict["tpr"],
+    #     roc_dict["thresholds"],
+    #     roc_dict["auc"],
+    #     roc_plot_fname,
+    #     dataset_name,
+    #     roc_dict["optimal_diff_idx"],
+    #     roc_dict["optimal_intersect_idx"],
+    #     # roc_dict["optimal_max_acc_idx"],
+    #     **rc_parameters,
+    # )
 
     return roc_dict
 
@@ -796,10 +797,10 @@ def compute_filtering_roc_curve(
 
     auc = roc_auc_score(y_true, y_score)
 
-    optimal_diff_idx = compute_optimal_roc_difference_index(tpr, fpr)
-    optimal_diff_th = thresholds[optimal_diff_idx]
-    optimal_diff_tpr = tpr[optimal_diff_idx]
-    optimal_diff_fpr = fpr[optimal_diff_idx]
+    # optimal_diff_idx = compute_optimal_roc_difference_index(tpr, fpr)
+    # optimal_diff_th = thresholds[optimal_diff_idx]
+    # optimal_diff_tpr = tpr[optimal_diff_idx]
+    # optimal_diff_fpr = fpr[optimal_diff_idx]
 
     optimal_intersect_idx = compute_optimal_roc_intersection_index(tpr, fpr)
 
@@ -830,10 +831,10 @@ def compute_filtering_roc_curve(
         "tpr": tpr,
         "thresholds": thresholds,
         "auc": auc,
-        "optimal_diff_idx": optimal_diff_idx,
-        "optimal_diff_th": optimal_diff_th,
-        "optimal_diff_tpr": optimal_diff_tpr,
-        "optimal_diff_fpr": optimal_diff_fpr,
+        # "optimal_diff_idx": optimal_diff_idx,
+        # "optimal_diff_th": optimal_diff_th,
+        # "optimal_diff_tpr": optimal_diff_tpr,
+        # "optimal_diff_fpr": optimal_diff_fpr,
         "optimal_intersect_idx": optimal_intersect_idx,
         "optimal_intersect_th": optimal_intersect_th,
         "optimal_intersect_tpr": optimal_intersect_tpr,
